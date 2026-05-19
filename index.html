@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name</title>
+  <meta name="description" content="PhD Candidate in Economics. Research on [your field]." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Tokens ────────────────────────────────────────────────── */
+    :root {
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-head: 'Cormorant Garamond', 'Palatino Linotype', serif;
+      --sidebar-w: 260px;
+      --transition: 0.22s ease;
+    }
+
+    [data-theme="light"] {
+      --bg:          #f7f6f2;
+      --bg-sidebar:  #eeecea;
+      --ink:         #1c1b18;
+      --ink-mid:     #3e3c38;
+      --ink-light:   #6b6860;
+      --accent:      #2d5a6b;
+      --rule:        #d4d1c8;
+      --tag-bg:      #d4e4e9;
+      --tag-ink:     #1e4455;
+      --toggle-bg:   #d4d1c8;
+    }
+
+    [data-theme="dark"] {
+      --bg:          #141412;
+      --bg-sidebar:  #1d1c19;
+      --ink:         #eeece6;
+      --ink-mid:     #cccac4;
+      --ink-light:   #888680;
+      --accent:      #7ab8c8;
+      --rule:        #38362f;
+      --tag-bg:      #1a3040;
+      --tag-ink:     #7ab8c8;
+      --toggle-bg:   #38362f;
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.025rem;
+      font-weight: 400;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ─── Fixed sidebar ─────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--rule);
+      overflow-y: auto;
+      padding: 2.75rem 1.75rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition), border-color var(--transition);
+      z-index: 200;
+    }
+
+    .sidebar__photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .sidebar__photo-caption {
+      font-size: 0.68rem;
+      color: var(--ink-light);
+      margin-bottom: 1.6rem;
+      letter-spacing: 0.01em;
+      transition: color var(--transition);
+    }
+
+    .sidebar__name {
+      font-family: var(--font-head);
+      font-size: 1.45rem;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+      color: var(--ink);
+      transition: color var(--transition);
+    }
+
+    .sidebar__role,
+    .sidebar__inst {
+      font-size: 0.82rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+      transition: color var(--transition);
+    }
+    .sidebar__inst { margin-bottom: 1.5rem; }
+
+    .sidebar__links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .sidebar__link {
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: opacity 0.15s;
+    }
+    .sidebar__link:hover { opacity: 0.65; }
+
+    .sidebar__link svg {
+      width: 13px;
+      height: 13px;
+      opacity: 0.65;
+      flex-shrink: 0;
+    }
+
+    .sidebar__divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 0 0 1.5rem;
+      transition: border-color var(--transition);
+    }
+
+    .sidebar__address {
+      font-size: 0.74rem;
+      color: var(--ink-light);
+      line-height: 1.65;
+      margin-top: auto;
+      font-style: normal;
+      transition: color var(--transition);
+    }
+
+    /* ─── Main column ───────────────────────────────────────────── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ─── Sticky tabs ───────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2.75rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__tabs {
+      display: flex;
+      flex: 1;
+    }
+
+    /* theme toggle in nav */
+    .nav__toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+      padding-left: 1rem;
+    }
+
+    .nav__toggle .toggle-track {
+      position: relative;
+      width: 34px;
+      height: 18px;
+      background: var(--toggle-bg);
+      border-radius: 9px;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .nav__toggle .toggle-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    [data-theme="dark"] .nav__toggle .toggle-thumb { transform: translateX(16px); }
+
+    .nav__toggle .toggle-label {
+      font-size: 0.7rem;
+      color: var(--ink-light);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      user-select: none;
+      transition: color var(--transition);
+    }
+
+    .nav__tab {
+      padding: 1rem 0;
+      margin-right: 2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav__tab:hover { color: var(--ink); }
+    .nav__tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ─── Content ───────────────────────────────────────────────── */
+    .content {
+      padding: 3.25rem 2.75rem 6rem;
+      max-width: 740px;
+    }
+
+    /* ─── Sections (tab panels) ─────────────────────────────────── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section__title {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    /* ─── Research sub-headings ─────────────────────────────────── */
+    .subsection__title {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-top: 2.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--rule);
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    .section__title + .subsection__title { margin-top: 0; }
+
+    .wip-entries { display: flex; flex-direction: column; }
+
+    /* ─── About ─────────────────────────────────────────────────── */
+    .about p { margin-bottom: 0.9rem; }
+    .about a { color: var(--accent); text-decoration: none; }
+    .about a:hover { text-decoration: underline; }
+
+    /* ─── Papers ────────────────────────────────────────────────── */
+    .papers { display: flex; flex-direction: column; gap: 2.5rem; }
+
+    .paper__title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.35;
+      margin-bottom: 0.25rem;
+      transition: color var(--transition);
+    }
+
+    .paper__tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--tag-ink);
+      background: var(--tag-bg);
+      padding: 0.15rem 0.55rem;
+      border-radius: 2px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      font-family: var(--font-body);
+      font-weight: 400;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .paper__authors {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      margin-bottom: 0.3rem;
+      font-style: italic;
+      transition: color var(--transition);
+    }
+    .paper__authors a {
+      color: var(--ink-light);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--rule);
+      transition: color 0.15s;
+    }
+    .paper__authors a:hover { color: var(--accent); }
+
+    .paper__journal {
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+      margin-bottom: 0.3rem;
+      transition: color var(--transition);
+    }
+
+    .paper__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 0.75rem;
+      font-size: 0.78rem;
+      margin-bottom: 0.65rem;
+    }
+    .paper__links a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .paper__links a:hover { border-bottom-color: var(--accent); }
+
+    /* ─── Collapsibles ──────────────────────────────────────────── */
+    details { margin-bottom: 0.2rem; }
+
+    summary {
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--ink-light);
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      user-select: none;
+      padding: 0.15rem 0;
+      transition: color 0.15s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before {
+      content: '▸';
+      font-size: 0.6rem;
+      transition: transform 0.18s;
+      display: inline-block;
+    }
+    details[open] > summary::before { transform: rotate(90deg); }
+    summary:hover { color: var(--ink); }
+
+    .details-content {
+      margin-top: 0.65rem;
+      margin-bottom: 0.5rem;
+      padding: 0.8rem 1rem;
+      border-left: 2px solid var(--rule);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--ink-mid);
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .details-content p + p { margin-top: 0.55rem; }
+    .details-content strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ─── Funders ───────────────────────────────────────────────── */
+    .funders { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+    .funder-pill {
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      border: 1px solid var(--rule);
+      padding: 0.1rem 0.6rem;
+      border-radius: 2px;
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    /* ─── WIP ───────────────────────────────────────────────────── */
+    .wip-entry { margin-bottom: 1.85rem; }
+    .wip__title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .wip__authors {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      font-style: italic;
+      margin-bottom: 0.35rem;
+      transition: color var(--transition);
+    }
+    .wip__authors a {
+      color: var(--ink-light);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--rule);
+    }
+    .wip__authors a:hover { color: var(--accent); }
+
+    /* ─── Policy ────────────────────────────────────────────────── */
+    .policy-entry { margin-bottom: 1.65rem; }
+    .policy__title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .policy__meta {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      margin-bottom: 0.3rem;
+      transition: color var(--transition);
+    }
+    .policy__links { font-size: 0.78rem; }
+    .policy__links a {
+      color: var(--accent);
+      text-decoration: none;
+      margin-right: 0.75rem;
+    }
+    .policy__links a:hover { text-decoration: underline; }
+
+    /* ─── Teaching ──────────────────────────────────────────────── */
+    .teaching-block {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+      transition: border-color var(--transition);
+    }
+    .teaching-block:last-child { border-bottom: none; }
+
+    .teaching__course {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: var(--ink);
+      transition: color var(--transition);
+    }
+
+    .teaching__meta {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      margin-bottom: 0.45rem;
+      transition: color var(--transition);
+    }
+
+    .teaching__desc {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      transition: color var(--transition);
+    }
+
+    /* ─── Mobile ────────────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      body { flex-direction: column; }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: 2rem 1.5rem 1.5rem;
+      }
+      .sidebar__photo { width: 90px; aspect-ratio: 1/1; }
+
+      .main { margin-left: 0; }
+      .nav { padding: 0 1.5rem; }
+      .nav__tab { margin-right: 1.2rem; font-size: 0.72rem; }
+      .nav__toggle .toggle-label { display: none; }
+      .content { padding: 2rem 1.5rem 4rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════ SIDEBAR ══════════════════════════ -->
+<aside class="sidebar">
+
+  <img class="sidebar__photo" src="photo.jpg" alt="Your Name" />
+  <p class="sidebar__photo-caption">London, 2025</p>
+
+  <h1 class="sidebar__name">Your Name</h1>
+  <p class="sidebar__role">PhD Candidate in Economics</p>
+  <p class="sidebar__inst">London School of Economics</p>
+
+  <div class="sidebar__links">
+    <a class="sidebar__link" href="CV.pdf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Download CV
+    </a>
+    <a class="sidebar__link" href="mailto:you@lse.ac.uk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      you@lse.ac.uk
+    </a>
+    <a class="sidebar__link" href="https://scholar.google.com/citations?user=XXXXX" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Google Scholar
+    </a>
+    <a class="sidebar__link" href="https://www.lse.ac.uk/people/your-name" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      LSE Profile
+    </a>
+    <a class="sidebar__link" href="https://bsky.app/profile/you.bsky.social" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4"/></svg>
+      Bluesky
+    </a>
+  </div>
+
+  <hr class="sidebar__divider" />
+
+  <address class="sidebar__address">
+    Department of Economics<br />
+    London School of Economics<br />
+    32 Lincoln's Inn Fields<br />
+    London WC2A 3PH, UK
+  </address>
+
+</aside>
+
+
+<!-- ══════════════════════════ MAIN ══════════════════════════════ -->
+<main class="main">
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__tabs">
+        <a class="nav__tab active" data-tab="about">About</a>
+        <a class="nav__tab" data-tab="research">Research</a>
+        <a class="nav__tab" data-tab="policy">Policy</a>
+        <a class="nav__tab" data-tab="teaching">Teaching</a>
+      </div>
+      <div class="nav__toggle">
+        <button class="toggle-track" id="themeBtn" aria-label="Toggle dark mode">
+          <div class="toggle-thumb"></div>
+        </button>
+        <span class="toggle-label" id="toggleLabel">Light</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <!-- ── ABOUT ─────────────────────────────────────────── -->
+    <section id="about" class="section active">
+      <h2 class="section__title">About</h2>
+      <div class="about">
+        <p>
+          I am a PhD Candidate in Economics at the
+          <a href="https://www.lse.ac.uk/economics">London School of Economics</a>.
+          I am a development economist working on [your research themes]. I use tools
+          from applied microeconomics and [methods], combining randomised control
+          trials, panel data, and administrative records.
+        </p>
+        <p>
+          I will join [Institution] as [Position] in [Year].
+        </p>
+        <p>
+          Previously, I was a [prior role] at [institution]. My research has been
+          supported by [funders, e.g. STICERD, the International Growth Centre, and J-PAL].
+        </p>
+      </div>
+    </section>
+
+    <!-- ── RESEARCH ───────────────────────────────────────── -->
+    <section id="research" class="section">
+      <h2 class="section__title">Research</h2>
+
+      <!-- Working Papers -->
+      <h3 class="subsection__title">Working Papers</h3>
+      <div class="papers">
+
+        <div class="paper">
+          <div class="paper__title">
+            Your Job Market Paper Title Here
+            <span class="paper__tag">Job Market Paper</span>
+          </div>
+          <p class="paper__authors">with <a href="#">Co-author One</a> and <a href="#">Co-author Two</a></p>
+          <div class="paper__links">
+            <a href="jmp.pdf">[Paper]</a>
+            <a href="#">[Slides]</a>
+            <a href="#">[VoxDev]</a>
+          </div>
+          <details>
+            <summary>Abstract</summary>
+            <div class="details-content">
+              <p>[Your abstract. Expand to read. 200–300 words summarising the question, method, and key findings.]</p>
+            </div>
+          </details>
+          <details>
+            <summary>Presentations</summary>
+            <div class="details-content">
+              <p><strong>(2024)</strong> LSE Development Economics Workshop, CSAE Oxford, Nordic Development Conference; <strong>(2025)</strong> NEUDC, BREAD, NBER Summer Institute DEV</p>
+            </div>
+          </details>
+          <details>
+            <summary>Funders &amp; Partners</summary>
+            <div class="details-content">
+              <div class="funders">
+                <span class="funder-pill">STICERD</span>
+                <span class="funder-pill">International Growth Centre</span>
+                <span class="funder-pill">J-PAL</span>
+                <span class="funder-pill">Weiss Fund</span>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="paper">
+          <div class="paper__title">
+            Second Working Paper Title
+            <span class="paper__tag">R&amp;R, <em>Journal Name</em></span>
+          </div>
+          <p class="paper__authors">with <a href="#">Co-author Name</a></p>
+          <div class="paper__links">
+            <a href="#">[Paper]</a>
+            <a href="#">[NBER WP]</a>
+            <a href="#">[Slides]</a>
+          </div>
+          <details>
+            <summary>Abstract</summary>
+            <div class="details-content"><p>[Abstract for paper 2.]</p></div>
+          </details>
+          <details>
+            <summary>Presentations</summary>
+            <div class="details-content">
+              <p><strong>(2023)</strong> Conference A, Conference B; <strong>(2024)</strong> Conference C, Conference D</p>
+            </div>
+          </details>
+        </div>
+
+      </div><!-- /working papers -->
+
+      <!-- Publications -->
+      <h3 class="subsection__title">Publications</h3>
+      <div class="papers">
+
+        <div class="paper">
+          <div class="paper__title">Published Paper Title</div>
+          <p class="paper__authors">with <a href="#">Co-author Name</a></p>
+          <p class="paper__journal"><em>Journal of Development Economics</em>, Vol. XX, 2024</p>
+          <div class="paper__links">
+            <a href="#">[Published Version]</a>
+            <a href="#">[Ungated WP]</a>
+          </div>
+          <details>
+            <summary>Abstract</summary>
+            <div class="details-content"><p>[Abstract for published paper.]</p></div>
+          </details>
+        </div>
+
+      </div><!-- /publications -->
+
+      <!-- Work in Progress -->
+      <h3 class="subsection__title">Work in Progress</h3>
+      <div class="wip-entries">
+
+        <div class="wip-entry">
+          <div class="wip__title">WIP Project One Title</div>
+          <p class="wip__authors">with <a href="#">Co-author A</a>, <a href="#">Co-author B</a>, and <a href="#">Co-author C</a></p>
+          <details>
+            <summary>Funders &amp; Partners</summary>
+            <div class="details-content">
+              <div class="funders"><span class="funder-pill">STEG</span><span class="funder-pill">ESRC</span></div>
+            </div>
+          </details>
+        </div>
+
+        <div class="wip-entry">
+          <div class="wip__title">WIP Project Two Title</div>
+          <p class="wip__authors">with <a href="#">Co-author D</a> and <a href="#">Co-author E</a></p>
+          <details>
+            <summary>Funders &amp; Partners</summary>
+            <div class="details-content">
+              <div class="funders"><span class="funder-pill">International Growth Centre</span></div>
+            </div>
+          </details>
+        </div>
+
+        <div class="wip-entry">
+          <div class="wip__title">WIP Project Three Title</div>
+          <p class="wip__authors">with <a href="#">Co-author F</a></p>
+        </div>
+
+      </div><!-- /wip -->
+
+    </section>
+
+    <!-- ── POLICY ─────────────────────────────────────────── -->
+    <section id="policy" class="section">
+      <h2 class="section__title">Policy Work</h2>
+
+      <div class="policy-entry">
+        <div class="policy__title">Policy Report or Synthesis Paper Title</div>
+        <p class="policy__meta">with Co-author A, Co-author B, and Co-author C · <em>IGC Synthesis Paper</em></p>
+        <div class="policy__links"><a href="#">[Link]</a><a href="#">[Policy Brief]</a></div>
+      </div>
+
+      <div class="policy-entry">
+        <div class="policy__title">Second Policy Report Title</div>
+        <p class="policy__meta">with Co-author A and Co-author B · <em>IGC Policy Toolkit</em></p>
+        <div class="policy__links"><a href="#">[Link]</a><a href="#">[Policy Paper]</a></div>
+      </div>
+    </section>
+
+    <!-- ── TEACHING ───────────────────────────────────────── -->
+    <section id="teaching" class="section">
+      <h2 class="section__title">Teaching</h2>
+
+      <div class="teaching-block">
+        <h3 class="teaching__course">Course Title One</h3>
+        <p class="teaching__meta">Teaching Assistant · LSE · [Year]</p>
+        <p class="teaching__desc">
+          [Brief description — level, topics covered, your role. E.g. "Graduate-level course on
+          development economics. Led weekly seminars and office hours for a cohort of 30 students."]
+        </p>
+      </div>
+
+      <div class="teaching-block">
+        <h3 class="teaching__course">Course Title Two</h3>
+        <p class="teaching__meta">Teaching Assistant · LSE · [Year]</p>
+        <p class="teaching__desc">
+          [Brief description.]
+        </p>
+      </div>
+
+      <div class="teaching-block">
+        <h3 class="teaching__course">Course Title Three</h3>
+        <p class="teaching__meta">Lecturer · [Institution] · [Year]</p>
+        <p class="teaching__desc">
+          [Brief description.]
+        </p>
+      </div>
+
+    </section>
+
+  </div><!-- /content -->
+</main>
+
+
+<script>
+  /* ── Tab switching ─────────────────────────────────────── */
+  document.querySelectorAll('.nav__tab').forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      const id = tab.dataset.tab;
+      document.querySelectorAll('.nav__tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  });
+
+  /* ── Theme toggle ──────────────────────────────────────── */
+  const html  = document.documentElement;
+  const btn   = document.getElementById('themeBtn');
+  const label = document.getElementById('toggleLabel');
+
+  const saved = localStorage.getItem('theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  html.setAttribute('data-theme', saved);
+  label.textContent = saved === 'dark' ? 'Dark' : 'Light';
+
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    label.textContent = next === 'dark' ? 'Dark' : 'Light';
+    localStorage.setItem('theme', next);
+  });
+</script>
+
+</body>
+</html>
