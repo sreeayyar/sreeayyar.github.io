@@ -15,7 +15,7 @@
       --font-body: 'Source Serif 4', Georgia, serif;
       --font-head: 'Cormorant Garamond', 'Palatino Linotype', serif;
       --sidebar-w: 260px;
-      --transition: 0.22s ease;
+      --transition: 0.2s ease;
     }
 
     [data-theme="light"] {
@@ -24,11 +24,11 @@
       --ink:         #1c1b18;
       --ink-mid:     #3e3c38;
       --ink-light:   #6b6860;
-      --accent:      #1a6b85;
-      --heading:     #1a6b85;
+      --accent:      #9b1c42;
+      --heading:     #9b1c42;
       --rule:        #d4d1c8;
-      --tag-bg:      #d4e4e9;
-      --tag-ink:     #1e4455;
+      --tag-bg:      #f0d4dd;
+      --tag-ink:     #6b1230;
       --toggle-bg:   #d4d1c8;
     }
 
@@ -38,11 +38,11 @@
       --ink:         #eeece6;
       --ink-mid:     #cccac4;
       --ink-light:   #888680;
-      --accent:      #5ec4de;
-      --heading:     #5ec4de;
+      --accent:      #6abf6c;
+      --heading:     #6abf6c;
       --rule:        #38362f;
-      --tag-bg:      #1a3040;
-      --tag-ink:     #7ab8c8;
+      --tag-bg:      #0f2e10;
+      --tag-ink:     #6abf6c;
       --toggle-bg:   #38362f;
     }
 
@@ -94,7 +94,7 @@
       color: var(--ink-light);
       margin-bottom: 1.6rem;
       letter-spacing: 0.01em;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .sidebar__name {
@@ -105,7 +105,7 @@
       letter-spacing: -0.01em;
       margin-bottom: 0.75rem;
       color: var(--accent);
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .sidebar__role,
@@ -113,7 +113,7 @@
       font-size: 0.82rem;
       color: var(--ink-light);
       line-height: 1.5;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
     .sidebar__inst { margin-bottom: 0.9rem; }
 
@@ -155,7 +155,7 @@
       line-height: 1.65;
       margin-top: auto;
       font-style: normal;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     /* ─── Main column ───────────────────────────────────────────── */
@@ -229,7 +229,7 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       user-select: none;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .nav__tab {
@@ -285,7 +285,7 @@
       text-transform: uppercase;
       color: var(--heading);
       margin-bottom: 1.75rem;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .wip-entries { display: flex; flex-direction: column; }
@@ -304,7 +304,7 @@
       font-weight: 500;
       line-height: 1.35;
       margin-bottom: 0.25rem;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .paper__tag {
@@ -331,7 +331,7 @@
       color: var(--ink-light);
       margin-bottom: 0.3rem;
       font-style: italic;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
     .paper__authors a {
       color: var(--ink-light);
@@ -345,7 +345,7 @@
       font-size: 0.85rem;
       color: var(--ink-mid);
       margin-bottom: 0.3rem;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .paper__links {
@@ -428,7 +428,7 @@
       color: var(--ink-light);
       font-style: italic;
       margin-bottom: 0.35rem;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
     .wip__authors a {
       color: var(--ink-light);
@@ -449,7 +449,7 @@
       font-size: 0.85rem;
       color: var(--ink-light);
       margin-bottom: 0.3rem;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
     .policy__links { font-size: 0.78rem; }
     .policy__links a {
@@ -474,21 +474,21 @@
       font-weight: 500;
       margin-bottom: 0.25rem;
       color: var(--ink);
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .teaching__meta {
       font-size: 0.85rem;
       color: var(--ink-light);
       margin-bottom: 0.45rem;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     .teaching__desc {
       font-size: 0.9rem;
       color: var(--ink-mid);
       line-height: 1.7;
-      transition: color var(--transition);
+      transition: color 0.2s ease;
     }
 
     /* ─── Mobile ────────────────────────────────────────────────── */
@@ -658,18 +658,21 @@
           </details>
         </div>
 
-<div class="paper">
-  <div class="paper__title">Golden Traps: Self-Reinforcing Dynamics of Artisanal Mining</div>
-  <p class="paper__authors">with <a href="#">Yoshiki Wiskamp</a> and <a href="#">Hema Balarama</a></p>
-  <details>
-    <summary>Funders &amp; Partners</summary>
-    <div class="details-content">
-      <div class="funders">
-        <span class="funder-pill">STEG (£14,462)</span>
+        <div class="paper">
+          <div class="paper__title">Golden Traps: Self-Reinforcing Dynamics of Artisanal Mining and Agricultural Land Degradation in Ghana</div>
+          <p class="paper__authors">with <a href="#">Yoshiki Wiskamp</a> and <a href="#">Hema Balarama</a></p>
+          <details>
+            <summary>Funders &amp; Partners</summary>
+            <div class="details-content">
+              <div class="funders">
+                <span class="funder-pill">STEG (£14,462)</span>
+              </div>
+            </div>
+          </details>
+        </div>
+
       </div>
-    </div>
-  </details>
-</div>    </section>
+    </section>
 
     <!-- ── POLICY ─────────────────────────────────────────── -->
     <section id="policy" class="section">
