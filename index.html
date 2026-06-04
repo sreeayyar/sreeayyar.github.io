@@ -25,6 +25,7 @@
       --ink-mid:     #3e3c38;
       --ink-light:   #6b6860;
       --accent:      #2d5a6b;
+      --heading:     #3d5a3e;
       --rule:        #d4d1c8;
       --tag-bg:      #d4e4e9;
       --tag-ink:     #1e4455;
@@ -38,6 +39,7 @@
       --ink-mid:     #cccac4;
       --ink-light:   #888680;
       --accent:      #7ab8c8;
+      --heading:     #7aab7e;
       --rule:        #38362f;
       --tag-bg:      #1a3040;
       --tag-ink:     #7ab8c8;
@@ -82,7 +84,7 @@
       width: 100%;
       aspect-ratio: 3 / 4;
       object-fit: cover;
-      object-position: top;
+      object-position: center;
       display: block;
       margin-bottom: 0.4rem;
     }
@@ -255,37 +257,36 @@
       max-width: 740px;
     }
 
-    /* ─── Sections (tab panels) ─────────────────────────────────── */
-    .section { display: none; }
-    .section.active { display: block; }
+    /* ─── Field highlights ──────────────────────────────────────── */
+    .field {
+      color: var(--heading);
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    /* ─── Sections (all visible, scroll-linked) ─────────────────── */
+    .section {
+      display: block;
+      padding-bottom: 1rem;
+      scroll-margin-top: 52px;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--rule);
+      padding-top: 3.25rem;
+      margin-top: 1rem;
+    }
 
     .section__title {
-      font-family: var(--font-head);
-      font-size: 1.6rem;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      border-bottom: 1px solid var(--rule);
-      padding-bottom: 0.5rem;
-      margin-bottom: 2rem;
-      transition: color var(--transition), border-color var(--transition);
-    }
-
-    /* ─── Research sub-headings ─────────────────────────────────── */
-    .subsection__title {
       font-family: var(--font-body);
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--ink-light);
-      margin-top: 2.5rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.35rem;
-      border-bottom: 1px solid var(--rule);
-      transition: color var(--transition), border-color var(--transition);
+      color: var(--heading);
+      margin-bottom: 1.75rem;
+      transition: color var(--transition);
     }
-
-    .section__title + .subsection__title { margin-top: 0; }
 
     .wip-entries { display: flex; flex-direction: column; }
 
@@ -295,7 +296,7 @@
     .about a:hover { text-decoration: underline; }
 
     /* ─── Papers ────────────────────────────────────────────────── */
-    .papers { display: flex; flex-direction: column; gap: 2.5rem; }
+    .papers { display: flex; flex-direction: column; gap: 1.5rem; }
 
     .paper__title {
       font-family: var(--font-head);
@@ -352,7 +353,7 @@
       flex-wrap: wrap;
       gap: 0.3rem 0.75rem;
       font-size: 0.78rem;
-      margin-bottom: 0.65rem;
+      margin-bottom: 0.25rem;
     }
     .paper__links a {
       color: var(--accent);
@@ -368,7 +369,7 @@
     summary {
       cursor: pointer;
       font-size: 0.78rem;
-      color: var(--ink-light);
+      color: var(--accent);
       list-style: none;
       display: inline-flex;
       align-items: center;
@@ -385,7 +386,7 @@
       display: inline-block;
     }
     details[open] > summary::before { transform: rotate(90deg); }
-    summary:hover { color: var(--ink); }
+    summary:hover { opacity: 0.7; }
 
     .details-content {
       margin-top: 0.65rem;
@@ -560,10 +561,9 @@
   <nav class="nav">
     <div class="nav__inner">
       <div class="nav__tabs">
-        <a class="nav__tab active" data-tab="about">About</a>
-        <a class="nav__tab" data-tab="research">Research</a>
-        <a class="nav__tab" data-tab="policy">Policy</a>
-        <a class="nav__tab" data-tab="teaching">Teaching</a>
+        <a class="nav__tab active" href="#about">About</a>
+        <a class="nav__tab" href="#research">Research</a>
+        <a class="nav__tab" href="#policy">Policy</a>
       </div>
       <div class="nav__toggle">
         <button class="toggle-track" id="themeBtn" aria-label="Toggle dark mode">
@@ -577,12 +577,12 @@
   <div class="content">
 
     <!-- ── ABOUT ─────────────────────────────────────────── -->
-    <section id="about" class="section active">
+    <section id="about" class="section">
       <h2 class="section__title">About</h2>
       <div class="about">
         <p>
           I am a PhD candidate in economics at the London School of Economics (LSE). My
-          research is in development economics, environmental economics and econometrics, with a focus on social protection
+          research is in <span class="field">development economics</span>, <span class="field">environmental economics</span> and <span class="field">econometrics</span>, with a focus on social protection
           programs and their role in rural development and climate resilience.
           I have an especial interest in applied microeconomic methods, while also using tools from
           macroeconomics and spatial economics in my research.
@@ -593,86 +593,17 @@
     <!-- ── RESEARCH ───────────────────────────────────────── -->
     <section id="research" class="section">
       <h2 class="section__title">Research</h2>
-
-      <!-- Working Papers -->
-      <h3 class="subsection__title">Working Papers</h3>
       <div class="papers">
 
         <div class="paper">
-          <div class="paper__title">Imagine your Life at 25: Children's Gender Attitudes and Later-Life Outcomes</div>
-          <div class="paper__tag-wrap"><span class="paper__tag">R&amp;R, <em>JPE Microeconomics</em></span></div>
-          <p class="paper__authors">
-            with <a href="#">Uta Bolt</a>, <a href="#">Eric French</a>, and <a href="#">Cormac O'Dea</a>
-          </p>
-          <div class="paper__links">
-            <a href="#">[Draft]</a>
-          </div>
+          <div class="paper__title">Migration in the Face of Climate Change: Assessing the Potential of Ultra-Poor Graduation Programs</div>
+          <p class="paper__authors">with <a href="#">Sarah Winton</a> · Primary data collection complete. Analysis underway.</p>
           <details>
             <summary>Abstract</summary>
             <div class="details-content">
-              <p>[Abstract — to be added.]</p>
+              <p>Macro models estimate high migration flows in response to climate change. However, whether and why individual households migrate in response to slow-onset climate stress is an open question. This project studies the climate-driven migration decisions of ultra-poor households in Upper Egypt, who are among the most climate-vulnerable, and the role of anti-poverty programs in these decisions. Building on an existing RCT of an anti-poverty Graduation program, we survey over 7,500 men and women from ultra-poor rural households five-years after rollout. We overlay high-resolution, satellite-based heat and drought measures on our surveys, and harmonise them with the RCT's baseline, midline, and two endline household surveys. Comparing households who were equally poor at baseline, before 50% receive an asset transfer and another 25% receive a transfer of half the value, reveals a non-monotonic relationship between asset transfer values and migration outcomes. We discuss our results in the context of migration as a coping versus investment strategy.</p>
             </div>
           </details>
-          <details>
-            <summary>Presentations</summary>
-            <div class="details-content">
-              <p>
-                <strong>(2023–24)</strong> NBER Children Programme Meeting (Boston)*,
-                Society of Labor Economics Annual Conference (Portland)*,
-                Sixth Monash-Warwick-Zurich Text-As-Data Workshop (Online),
-                NBER Program on Children Meeting 2024,
-                Royal Economic Society Annual Conference (Glasgow)*,
-                Intergenerational Transfers, Insurance and the Transmission of Inequality (IFS, London)*
-              </p>
-              <p style="font-size:0.8rem; color:var(--ink-light); margin-top:0.5rem;">* Denotes presentation by co-author</p>
-            </div>
-          </details>
-        </div>
-
-      </div><!-- /working papers -->
-
-      <!-- Publications -->
-      <h3 class="subsection__title">Publications</h3>
-      <div class="papers">
-
-        <div class="paper">
-          <div class="paper__title">
-            Conditional Likelihood Ratio Test with Many Weak Instruments
-          </div>
-          <p class="paper__authors">
-            with <a href="#">Taisuke Otsu</a> and <a href="#">Yukitoshi Matsushita</a>
-          </p>
-          <p class="paper__journal"><em>Econometric Theory</em>, 2025</p>
-          <div class="paper__links">
-            <a href="#">[Published Version]</a>
-          </div>
-          <details>
-            <summary>Abstract</summary>
-            <div class="details-content">
-              <p>[Abstract — to be added.]</p>
-            </div>
-          </details>
-        </div>
-
-      </div><!-- /publications -->
-
-      <!-- Work in Progress -->
-      <h3 class="subsection__title">Work in Progress</h3>
-      <div class="wip-entries">
-
-        <div class="wip-entry">
-          <div class="wip__title">Does Uplifting the Poor Stimulate Growth? Evidence from Bangladesh</div>
-          <details>
-            <summary>Abstract</summary>
-            <div class="details-content">
-              <p>[Abstract — to be added.]</p>
-            </div>
-          </details>
-        </div>
-
-        <div class="wip-entry">
-          <div class="wip__title">Migration in the Face of Climate Change: Assessing the Potential of Ultra-Poor Graduation Programs</div>
-          <p class="wip__authors">with <a href="#">Sarah Winton</a> · Primary data collection ongoing</p>
           <details>
             <summary>Funders &amp; Partners</summary>
             <div class="details-content">
@@ -685,55 +616,69 @@
           </details>
         </div>
 
-        <div class="wip-entry">
-          <div class="wip__title">Golden Traps: Self-Reinforcing Dynamics of Artisanal Mining and Agricultural Land Degradation in Ghana</div>
-          <p class="wip__authors">with <a href="#">Yoshiki Wiskamp</a></p>
+        <div class="paper">
+          <div class="paper__title">Imagine your Life at 25: Children's Gender Attitudes and Later-Life Outcomes</div>
+          <p class="paper__authors">
+            with <a href="#">Uta Bolt</a>, <a href="#">Eric French</a>, and <a href="#">Cormac O'Dea</a>
+          </p>
+          <p class="paper__journal">Revise &amp; Resubmit, <em>JPE Microeconomics</em></p>
+          <div class="paper__links">
+            <a href="#">[Draft]</a>
+          </div>
+          <details>
+            <summary>Abstract</summary>
+            <div class="details-content">
+              <p>[Abstract — to be added.]</p>
+            </div>
+          </details>
         </div>
 
-      </div><!-- /wip -->
+        <div class="paper">
+          <div class="paper__title">Conditional Likelihood Ratio Test with Many Weak Instruments</div>
+          <p class="paper__authors">with <a href="#">Taisuke Otsu</a> and <a href="#">Yukitoshi Matsushita</a></p>
+          <p class="paper__journal"><em>Econometric Theory</em>, 2025</p>
+          <div class="paper__links">
+            <a href="#">[Published Version]</a>
+          </div>
+          <details>
+            <summary>Abstract</summary>
+            <div class="details-content">
+              <p>[Abstract — to be added.]</p>
+            </div>
+          </details>
+        </div>
 
+        <div class="paper">
+          <div class="paper__title">Does Uplifting the Poor Stimulate Growth? Evidence from Bangladesh</div>
+          <details>
+            <summary>Abstract</summary>
+            <div class="details-content">
+              <p>[Abstract — to be added.]</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="paper">
+          <div class="paper__title">Golden Traps: Self-Reinforcing Dynamics of Artisanal Mining and Agricultural Land Degradation in Ghana</div>
+          <p class="paper__authors">with <a href="#">Yoshiki Wiskamp</a> and <a href="#">Hema Balarama</a></p>
+        </div>
+
+      </div>
     </section>
 
     <!-- ── POLICY ─────────────────────────────────────────── -->
     <section id="policy" class="section">
       <h2 class="section__title">Policy Work</h2>
 
-      <div class="policy-entry">
-        <div class="policy__title">Climate Migration and International Aid</div>
-        <p class="policy__meta">
-          with <a href="#">Gharad Bryan</a> and <a href="#">Felix Iglhaut</a> ·
-          <em>G²LM|LIC Synthesis Paper</em>
+      <div class="paper">
+        <div class="paper__title">Climate Migration and International Aid</div>
+        <p class="paper__authors">
+          with <a href="#">Gharad Bryan</a> and <a href="#">Felix Iglhaut</a>
         </p>
-        <div class="policy__links">
+        <p class="paper__journal"><em>G²LM|LIC Synthesis Paper</em></p>
+        <div class="paper__links">
           <a href="#">[Link]</a>
         </div>
-      </div>
-
-    </section>
-
-    <!-- ── TEACHING ───────────────────────────────────────── -->
-    <section id="teaching" class="section">
-      <h2 class="section__title">Teaching</h2>
-
-      <div class="teaching-block">
-        <h3 class="teaching__course">PP402: Quantitative Methods for Public Policy</h3>
-        <p class="teaching__meta">Teaching Assistant · LSE · 2025–26 · Masters of Public Policy</p>
-      </div>
-
-      <div class="teaching-block">
-        <h3 class="teaching__course">EC2C4: Econometrics I</h3>
-        <p class="teaching__meta">Teaching Assistant · LSE · 2025–26 · Second-year Undergraduate</p>
-      </div>
-
-      <div class="teaching-block">
-        <h3 class="teaching__course">EC2C3: Econometrics I</h3>
-        <p class="teaching__meta">Teaching Assistant · LSE · 2024–25 · Second-year Undergraduate</p>
-      </div>
-
-      <div class="teaching-block">
-        <h3 class="teaching__course">EC2C1: Econometrics II</h3>
-        <p class="teaching__meta">Teaching Assistant · LSE · 2022–24 · Second-year Undergraduate</p>
-        <p class="teaching__desc">LSE Class Teacher Award, 2023 and 2024.</p>
       </div>
 
     </section>
@@ -743,18 +688,22 @@
 
 
 <script>
-  /* ── Tab switching ─────────────────────────────────────── */
-  document.querySelectorAll('.nav__tab').forEach(tab => {
-    tab.addEventListener('click', e => {
-      e.preventDefault();
-      const id = tab.dataset.tab;
-      document.querySelectorAll('.nav__tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById(id).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'instant' });
+  /* ── Scroll-linked nav highlighting ───────────────────── */
+  const tabs     = document.querySelectorAll('.nav__tab');
+  const sections = document.querySelectorAll('.section');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tabs.forEach(t => t.classList.remove('active'));
+        const active = document.querySelector(`.nav__tab[href="#${id}"]`);
+        if (active) active.classList.add('active');
+      }
     });
-  });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+
+  sections.forEach(s => observer.observe(s));
 
   /* ── Theme toggle ──────────────────────────────────────── */
   const html  = document.documentElement;
