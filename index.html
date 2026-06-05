@@ -254,7 +254,7 @@
     /* ─── Content ───────────────────────────────────────────────── */
     .content {
       padding: 3.25rem 2.75rem 6rem;
-      max-width: 800px;
+      max-width: 820px;
     }
 
     /* ─── Field highlights ──────────────────────────────────────── */
@@ -349,11 +349,13 @@
     }
 
     .paper__links {
-      display: flex;
+      display: inline-flex;
       flex-wrap: wrap;
       gap: 0.3rem 0.75rem;
       font-size: 0.78rem;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0;
+      margin-right: 0.75rem;
+      vertical-align: middle;
     }
     .paper__links a {
       color: var(--accent);
@@ -364,7 +366,12 @@
     .paper__links a:hover { border-bottom-color: var(--accent); }
 
     /* ─── Collapsibles ──────────────────────────────────────────── */
-    details { margin-bottom: 0.2rem; }
+    details {
+      display: inline-block;
+      margin-bottom: 0;
+      margin-right: 0.75rem;
+      vertical-align: middle;
+    }
 
     summary {
       cursor: pointer;
@@ -375,7 +382,8 @@
       align-items: center;
       gap: 0.3rem;
       user-select: none;
-      padding: 0.15rem 0;
+      padding: 0;
+      vertical-align: middle;
       transition: color 0.15s;
     }
     summary::-webkit-details-marker { display: none; }
@@ -389,6 +397,8 @@
     summary:hover { opacity: 0.7; }
 
     .details-content {
+      display: block;
+      clear: both;
       margin-top: 0.65rem;
       margin-bottom: 0.5rem;
       padding: 0.8rem 1rem;
@@ -581,9 +591,9 @@
       <h2 class="section__title">About</h2>
       <div class="about">
         <p>
-          Hello! I am a PhD candidate in economics at the London School of Economics (LSE). My
+          I am a PhD candidate in economics at the London School of Economics (LSE). My
           research is in <span class="field">development economics</span>, <span class="field">environmental economics</span> and <span class="field">econometrics</span>, with a focus on social protection
-          programs and their role in rural development and climate resilience.
+          programs and their role in rural development and climate adaptation.
         </p>
       </div>
     </section>
@@ -619,10 +629,7 @@
           <p class="paper__authors">
             with <a href="#">Uta Bolt</a>, <a href="#">Eric French</a>, and <a href="#">Cormac O'Dea</a>
           </p>
-          <p class="paper__journal">Revise &amp; Resubmit, <em>JPE Microeconomics</em></p>
-          <div class="paper__links">
-            <a href="#">[Draft]</a>
-          </div>
+          <p class="paper__journal">Revise &amp; Resubmit, <em>JPE Microeconomics</em> · <a href="#" style="color:var(--accent); text-decoration:none; font-size:0.85rem;">[Draft]</a></p>
           <details>
             <summary>Abstract</summary>
             <div class="details-content">
@@ -634,10 +641,7 @@
         <div class="paper">
           <div class="paper__title">Conditional Likelihood Ratio Test with Many Weak Instruments</div>
           <p class="paper__authors">with <a href="#">Taisuke Otsu</a> and <a href="#">Yukitoshi Matsushita</a></p>
-          <p class="paper__journal"><em>Econometric Theory</em>, 2025</p>
-          <div class="paper__links">
-            <a href="#">[Published Version]</a>
-          </div>
+          <p class="paper__journal"><em>Econometric Theory</em>, 2025 · <a href="#" style="color:var(--accent); text-decoration:none; font-size:0.85rem;">[Published Version]</a></p>
           <details>
             <summary>Abstract</summary>
             <div class="details-content">
